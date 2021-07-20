@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_US"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://azure.github.io/AppService/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azure.github.io/AppService/" rel="alternate" type="text/html" hreflang="en_US" /><updated>2021-07-20T00:05:41+00:00</updated><id>https://azure.github.io/AppService/feed.xml</id><title type="html">Azure App Service</title><subtitle>Announcements, updates, and release notes from the Azure App Service product team.</subtitle><author><name>Azure App Service</name></author><entry><title type="html">General Availability of new Azure App Service built-in policies</title><link href="https://azure.github.io/AppService/2021/07/12/General-Availability-of-new-azure-built-in-policies.html" rel="alternate" type="text/html" title="General Availability of new Azure App Service built-in policies" /><published>2021-07-12T00:00:00+00:00</published><updated>2021-07-12T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/07/12/General%20Availability%20of%20new%20azure%20built-in%20policies</id><content type="html" xml:base="https://azure.github.io/AppService/2021/07/12/General-Availability-of-new-azure-built-in-policies.html">&lt;p&gt;One of the tools that Azure provides to enforce governance and controls is &lt;a href=&quot;https://docs.microsoft.com/azure/governance/policy/overview&quot;&gt;Azure Policies&lt;/a&gt;. By employing Azure policies, IT organizations are able to enforce controls around provisioning Azure resources to ensure adherence to security and  compliance standards. Along with the ability to allow users to create custom Azure policies, Azure platform provides built-in policies around the use of each Azure service which can be employed as it is or could be further customized based on the requirements.&lt;/p&gt;
+
+&lt;p&gt;App Service provides many such &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/policy-reference&quot;&gt;built-in policies&lt;/a&gt; which help secure applications and promote best practices. In recent days, new built-in policies have been released which could be used to improve the security posture of the apps deployed and also help streamline the deployment standards. Some of these policies with &lt;a href=&quot;https://docs.microsoft.com/azure/governance/policy/concepts/effects#audit&quot;&gt;Audit&lt;/a&gt; or &lt;a href=&quot;https://docs.microsoft.com/azure/governance/policy/concepts/effects#auditifnotexists&quot;&gt;AuditIfNotExists&lt;/a&gt; effect result in creation of audit records for all applications that do not comply with the controls and others with &lt;a href=&quot;https://docs.microsoft.com/azure/governance/policy/concepts/effects#deployifnotexists&quot;&gt;DeployIfNotExists&lt;/a&gt; results in execution of remediation tasks that makes changes to the configuration of the application to implement the desired controls. Policies with &lt;a href=&quot;https://docs.microsoft.com/azure/governance/policy/concepts/effects#deny&quot;&gt;Deny&lt;/a&gt; effect cause a create or update request to fail if that request results in creation or update of an application that does not match the defined standards.&lt;/p&gt;
+
+&lt;p&gt;Following table lists the new built-in policies categorized by the area of control that they address :&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Area of Concern&lt;/th&gt;
+      &lt;th&gt;Policy&lt;/th&gt;
+      &lt;th&gt;Effect&lt;/th&gt;
+      &lt;th&gt;Application SKU&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Security&lt;/td&gt;
+      &lt;td&gt;App Service should   disable public network access&lt;/td&gt;
+      &lt;td&gt;AuditIfNotExists,   Disabled&lt;/td&gt;
+      &lt;td&gt;All except   IsolatedV1 &amp;amp; IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Security&lt;/td&gt;
+      &lt;td&gt;Configure App   Service to disable public network access&lt;/td&gt;
+      &lt;td&gt;DeployIfNotExists,   Disabled&lt;/td&gt;
+      &lt;td&gt;All except   IsolatedV1 &amp;amp; IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Security&lt;/td&gt;
+      &lt;td&gt;App Service   Environment apps should not be reachable over public internet&lt;/td&gt;
+      &lt;td&gt;AuditIfNotExists,   Disabled&lt;/td&gt;
+      &lt;td&gt;IsolatedV1, IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Routing&lt;/td&gt;
+      &lt;td&gt;App Service should   use private link&lt;/td&gt;
+      &lt;td&gt;AuditIfNotExists,   Disabled&lt;/td&gt;
+      &lt;td&gt;PremiumV2,   PremiumV3, Functions Premium&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Routing&lt;/td&gt;
+      &lt;td&gt;App Service apps should use a SKU that supports private link&lt;/td&gt;
+      &lt;td&gt;AuditIfNotExists, Deny,  Disabled&lt;/td&gt;
+      &lt;td&gt;PremiumV2,   PremiumV3, Functions Premium&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Routing&lt;/td&gt;
+      &lt;td&gt;Configure App   Service to use private DNS zones&lt;/td&gt;
+      &lt;td&gt;DeployIfNotExists,   Disabled&lt;/td&gt;
+      &lt;td&gt;PremiumV2,   PremiumV3, Functions Premium&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Network Routing&lt;/td&gt;
+      &lt;td&gt;App Service apps   should enable outbound non-RFC 1918 traffic to Azure Virtual Network&lt;/td&gt;
+      &lt;td&gt;AuditIfNotExists,   Disabled&lt;/td&gt;
+      &lt;td&gt;All except   IsolatedV1 &amp;amp; IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Application   Security&lt;/td&gt;
+      &lt;td&gt;App Service   Environment should enable internal encryption&lt;/td&gt;
+      &lt;td&gt;Audit, Disabled&lt;/td&gt;
+      &lt;td&gt;IsolatedV1, IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Application   Security&lt;/td&gt;
+      &lt;td&gt;App Service   Environment should disable TLS 1.0 and 1.1&lt;/td&gt;
+      &lt;td&gt;Audit, Disabled&lt;/td&gt;
+      &lt;td&gt;IsolatedV1, IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Application   Security&lt;/td&gt;
+      &lt;td&gt;App Service   Environment should be configured with strongest TLS Cipher Suites&lt;/td&gt;
+      &lt;td&gt;Audit, Disabled&lt;/td&gt;
+      &lt;td&gt;IsolatedV1, IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Service Governance&lt;/td&gt;
+      &lt;td&gt;App Service   Environment should be provisioned with latest versions&lt;/td&gt;
+      &lt;td&gt;Audit, Disabled&lt;/td&gt;
+      &lt;td&gt;IsolatedV1, IsolatedV2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;network-security&quot;&gt;Network Security&lt;/h3&gt;
+
+&lt;h4 id=&quot;app-service-should-disable-public-network-access&quot;&gt;App Service should disable public network access&lt;/h4&gt;
+
+&lt;p&gt;Internal user facing applications should ensure that they are not accessible over public internet. Disabling inbound public network access improves security by ensuring that the app isn’t exposed on public internet. For applications deployed in the multi-tenant App Service, use this policy to flag all applications that are accessible over public network. If the organization mandates that applications should not be accessible over public internet, one could use “Configure App Service to disable public network access” policy to automatically disable the inbound public network access following the policy run.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-service-environment-apps-should-not-be-reachable-over-public-internet&quot;&gt;App Service Environment apps should not be reachable over public internet&lt;/h4&gt;
+
+&lt;p&gt;Applications deployed in &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/environment/intro&quot;&gt;App Service Environment&lt;/a&gt; where the access from public internet is not desired, should be deployed in a private IP address inside the VNET. The internal endpoint is an internal load balancer. This policy could be used to audit applications that violate this control and are accessible over public internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;network-routing&quot;&gt;Network Routing&lt;/h3&gt;
+
+&lt;h4 id=&quot;app-service-should-use-private-link&quot;&gt;App Service should use private link&lt;/h4&gt;
+&lt;p&gt;To ensure that applications deployed in multi-tenant app service are only accessible privately on a non-public route, one should create &lt;a href=&quot;https://docs.microsoft.com/azure/private-link/&quot;&gt;private link&lt;/a&gt; to provide private access to them. This could be done by creating a private link to the apps deployed in App Service, as described &lt;a href=&quot;https://docs.microsoft.com/azure/private-link/tutorial-private-endpoint-webapp-portal&quot;&gt;here&lt;/a&gt;. Policy “App Service should use private link” creates an audit record for all apps that do not provide private link. These records can then be used to identify such applications to determine if a corrective action is required.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-service-apps-should-use-a-sku-that-supports-private-link&quot;&gt;App Service apps should use a SKU that supports private link&lt;/h4&gt;
+&lt;p&gt;To ensure private access to applications deployed in multi-tenant app service, one requires to provision a private link to the application. Not all App Service SKUs support private link. Private Link is supported only on the following App Service Plans : PremiumV2, PremiumV3, Functions Premium (sometimes referred to as the Elastic Premium plan). This policy provides ability to audit or deny deployment of applications on App Service Plans that do not support private link.&lt;/p&gt;
+
+&lt;h4 id=&quot;configure-app-service-to-use-private-dns-zones&quot;&gt;Configure App Service to use private DNS zones&lt;/h4&gt;
+
+&lt;p&gt;On the creation of a private endpoint to a webapp, a DNS entry is required to be created to resolve the name of private endpoint IP address to the fully qualified domain name(FQDN) of the connection string. The network interface associated with the private endpoint contains information to configure DNS, that is FQDN and private IP address to the private link resource i.e. the app. It is recommended to setup a private DNS zone to override the DNS resolution for a private endpoint. A private DNS zone can be linked to the one’s virtual network to resolve specific domains. Policy “Configure App Service to use private DNS zones” automatically configures apps accessible over private endpoints to use a private DNS zone.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-service-apps-should-enable-outbound-non-rfc-1918-traffic-to-azure-virtual-network&quot;&gt;App Service apps should enable outbound non-RFC 1918 traffic to Azure Virtual Network&lt;/h4&gt;
+&lt;p&gt;App Service provides a feature called Regional &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet#regional-vnet-integration&quot;&gt;VNet Integration&lt;/a&gt; to enable apps deployed in multi-tenant service to access resources in or through a VNET. The feature allows application routing to be controlled at the individual app level. When Route All is not enabled, the app only routes RFC1918 traffic into VNet. Enabling Route All allows NSGs and UDRs to be used for all outbound traffic from the App Service app. Steps to set up that setting are described &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet&quot;&gt;here&lt;/a&gt;. Policy “App Service apps should enable outbound non-RFC 1918 traffic to Azure Virtual Network” creates an audit record and thus helps identify applications that don’t have Route All enabled.&lt;/p&gt;
+
+&lt;h3 id=&quot;application-security&quot;&gt;Application Security&lt;/h3&gt;
+
+&lt;h4 id=&quot;app-service-environment-should-enable-internal-encryption&quot;&gt;App Service Environment should enable internal encryption&lt;/h4&gt;
+&lt;p&gt;By default, to enable higher throughput, internal components of App Service Environment do not use encryption while communicating among themselves. If one has a compliance requirement that requires complete encryption of the end to end data path, encryption could be enabled by setting a &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/environment/app-service-app-service-environment-custom-settings#enable-internal-encryption&quot;&gt;custom setting&lt;/a&gt;. Policy “App Service Environment should enable internal encryption” creates an audit record for all App Service Environments that do not use internal encryption.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-service-environment-should-disable-tls-10-and-11&quot;&gt;App Service Environment should disable TLS 1.0 and 1.1&lt;/h4&gt;
+&lt;p&gt;TLS 1.0 and 1.1 are out-of-date protocols that do not support modern cryptographic algorithms and thus are deemed vulnerable to attacks. To disable TLS 1.0 and 1.1 for all the apps in an ASE, one could set custom setting on the ASE as described &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/environment/app-service-app-service-environment-custom-settings#disable-tls-10-and-tls-11&quot;&gt;here&lt;/a&gt;. Policy “App Service Environment should disable TLS 1.0 and 1.1” help identify and create a record for all ASEs that have TLS 1.0 and 1.1 enabled.&lt;/p&gt;
+
+&lt;h4 id=&quot;app-service-environment-should-be-configured-with-strongest-tls-cipher-suites&quot;&gt;App Service Environment should be configured with strongest TLS Cipher Suites&lt;/h4&gt;
+&lt;p&gt;By default, ASE supports changing the TLS cipher suite by using custom setting as defined &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/environment/app-service-app-service-environment-custom-settings#change-tls-cipher-suite-order&quot;&gt;here&lt;/a&gt;. Changing the cipher suite affects an entire App Service Environment. For ASE to function, there are two cipher suites required; 
+TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, and TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256.  Default setting for ASE also has weaker ciphers included in the suite, if you wish to operate your ASE with the strongest and most minimal set of cipher suites, then one should use just the two required ciphers. “App Service Environment should be configured with strongest TLS Cipher Suites” creates an audit record for all those ASEs which do not use these required cipher suites or use cipher suites other than just these two.&lt;/p&gt;
+
+&lt;h3 id=&quot;service-governance&quot;&gt;Service Governance&lt;/h3&gt;
+
+&lt;h4 id=&quot;app-service-environment-should-be-provisioned-with-latest-versions&quot;&gt;App Service Environment should be provisioned with latest versions&lt;/h4&gt;
+&lt;p&gt;Older version of App Service Environment requires manual management of Azure’s resources and have greater scaling limitations. It is recommended that one uses ASEv2 or ASEv3(in preview) while creating new App Service Environment. This policy identifies all App Service Environments that are ASEv1.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="networking" /><summary type="html">One of the tools that Azure provides to enforce governance and controls is Azure Policies. By employing Azure policies, IT organizations are able to enforce controls around provisioning Azure resources to ensure adherence to security and compliance standards. Along with the ability to allow users to create custom Azure policies, Azure platform provides built-in policies around the use of each Azure service which can be employed as it is or could be further customized based on the requirements.</summary></entry><entry><title type="html">How to create a Blazor WebAssembly gRPC-Web app using App Service on an Azure Arc Enabled Kubernetes Cluster</title><link href="https://azure.github.io/AppService/2021/07/08/How-to-create-a-blazor-webassembly-grpc-web-app-using-app-service-on-an-azure-arc-enabled-kubernetes-cluster.html" rel="alternate" type="text/html" title="How to create a Blazor WebAssembly gRPC-Web app using App Service on an Azure Arc Enabled Kubernetes Cluster" /><published>2021-07-08T00:00:00+00:00</published><updated>2021-07-08T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/07/08/How-to-create-a-blazor-webassembly-grpc-web-app-using-app-service-on-an-azure-arc-enabled-kubernetes-cluster</id><content type="html" xml:base="https://azure.github.io/AppService/2021/07/08/How-to-create-a-blazor-webassembly-grpc-web-app-using-app-service-on-an-azure-arc-enabled-kubernetes-cluster.html">&lt;p&gt;With the release of the &lt;a href=&quot;https://azure.microsoft.com/updates/public-preview-run-app-service-on-kubernetes-or-anywhere-with-azure-arc/&quot;&gt;App Service on Kubernetes preview&lt;/a&gt;, you can now run App Service on Kubernetes deploying your web apps to Azure Kubernetes Service, or the cluster of your choosing. This enables you to utilize App Service features including continuous deployment with GitHub Actions and deployment slots.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial, we’ll be deploying a .NET 5 gRPC-Web app to a Custom Location (App Service deployed on an Arc-enabled AKS cluster) with App Service on Kubernetes using the same gRPC-Web app we created in &lt;a href=&quot;https://azure.github.io/AppService/2021/03/15/How-to-use-gRPC-Web-with-Blazor-WebAssembly-on-App-Service.html&quot;&gt;this blog&lt;/a&gt;. This example assumes you already have your resource group, connected Arc cluster, custom location, and App Service Kubernetes environment setup. Follow the steps in the &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/manage-create-arc-environment&quot;&gt;documentation&lt;/a&gt; if you do not have these resources created.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-your-web-app&quot;&gt;Creating your Web App&lt;/h2&gt;
+&lt;p&gt;Creating your web app resource in the Azure portal should look very familiar to what you’ve seen before.  When selecting your Resource Group, make sure it is the resource group you’ve created with all of your Azure Arc resources in them. Once the correct resource group is selected, as well as the operating system (Linux) you will find your Arc custom location in the Region drop-down menu.&lt;/p&gt;
+
+&lt;p&gt;If you would like to use the CLI to create your App Service resource, please see the &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-arc#5-deploy-some-code&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To create your web app using the portal:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Choose the &lt;strong&gt;Subscription&lt;/strong&gt; where the Resource Group lives containing your Azure Arc resources&lt;/li&gt;
+  &lt;li&gt;Choose the correct &lt;strong&gt;Resource Group&lt;/strong&gt; that contains your Azure Arc resources (cluster, custom location, Kube environment, etc.)&lt;/li&gt;
+  &lt;li&gt;Give your site a unique &lt;strong&gt;Name&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Choose &lt;strong&gt;.NET 5&lt;/strong&gt; for your &lt;strong&gt;Runtime stack&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;Operating System&lt;/strong&gt; will need to be &lt;strong&gt;Linux&lt;/strong&gt; since App Service on Kubernetes is currently Linux only.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to the &lt;strong&gt;Region&lt;/strong&gt; drop down menu and choose your custom location under &lt;strong&gt;Custom Locations (Preview)&lt;/strong&gt;. You may notice when you choose your custom location, the appended domain under the &lt;strong&gt;Name&lt;/strong&gt; option is updated to include your Kube environment name and Arc region.  Where you typically would see &lt;em&gt;azurewebsites.net&lt;/em&gt;, you now see &lt;em&gt;k4apps.io&lt;/em&gt;.  Keep in mind the custom location is the abstracted layer on top of your Azure Arc enabled cluster that enables you to use Azure services.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/AppService/media/2021/07/grpc_arc_1.png&quot; alt=&quot;grpc web&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Next, click &lt;strong&gt;Review + create&lt;/strong&gt; to create your resource. Once your resource is created, you can view that it is deployed to your custom location by visiting the custom location resource.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/AppService/media/2021/07/grpc_arc_2.png&quot; alt=&quot;grpc web&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;deploy-your-application&quot;&gt;Deploy your application&lt;/h2&gt;
+&lt;p&gt;Once your web app resource is created you can use the &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-arc#5-deploy-some-code&quot;&gt;Zip Deploy&lt;/a&gt; method to push your application code to your web app.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using the command line, navigate to the publish files. These will be the publish files in your Server project. The path should look similar to this:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BlazorGrpcWebApp/Server/bin/Release/net5.0/publish
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Select all of the files in the publish directory using &lt;strong&gt;ctl+a&lt;/strong&gt;, then &lt;strong&gt;Right-click&lt;/strong&gt;, navigate to &lt;strong&gt;Send to&lt;/strong&gt;, select &lt;strong&gt;Compressed (zipped) folder&lt;/strong&gt;. Name the file &lt;em&gt;blazorgrpcwebapp.zip&lt;/em&gt; and save it. This will create the .zip file that you will use in the next step.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using the command line, navigate to the directory including the &lt;em&gt;blazorgrpcwebapp.zip&lt;/em&gt; file you just created and run the following command&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az webapp deployment &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;config-zip &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; my-resource-group &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; my-arc-app &lt;span class=&quot;nt&quot;&gt;--src&lt;/span&gt; blazorgrpcwebapp.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This command will publish your code to the web app and you’ll be able to re-visit your resource &lt;em&gt;my-arc-app&lt;/em&gt; and select &lt;strong&gt;Browse&lt;/strong&gt; to view your application in the browser. Notice your URL is appended with the .k4app.io domain. This deployment may take a few minutes so you may see the default deployment screen while you wait.&lt;/p&gt;
+
+&lt;p&gt;Once it’s complete you can view the application and verify that grpc-web calls are still being made.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2021/07/grpc_arc_3.png&quot; alt=&quot;grpc web&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/app-service/manage-create-arc-environment&quot;&gt;Set up an Azure Arc Enabled Kubernetes cluster to run App Service, Functions, and Logic Apps (Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://azure.github.io/AppService/2021/03/15/How-to-use-gRPC-Web-with-Blazor-WebAssembly-on-App-Service.html&quot;&gt;How to use gRPC-Web with Blazor WebAssembly on App Service&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/app-service/deploy-zip#deploy-zip-file-with-azure-cli&quot;&gt;Deploy ZIP file with Azure CLI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://azure.microsoft.com/updates/public-preview-run-app-service-on-kubernetes-or-anywhere-with-azure-arc/&quot;&gt;App Service on Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Azure App Service</name></author><category term="dotnet" /><category term="kubernetes" /><summary type="html">With the release of the App Service on Kubernetes preview, you can now run App Service on Kubernetes deploying your web apps to Azure Kubernetes Service, or the cluster of your choosing. This enables you to utilize App Service features including continuous deployment with GitHub Actions and deployment slots.</summary></entry><entry><title type="html">Deploying Linux custom container from private Azure Container Registry</title><link href="https://azure.github.io/AppService/2021/07/03/Linux-container-from-ACR-with-private-endpoint.html" rel="alternate" type="text/html" title="Deploying Linux custom container from private Azure Container Registry" /><published>2021-07-03T00:00:00+00:00</published><updated>2021-07-03T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/07/03/Linux-container-from-ACR-with-private-endpoint</id><content type="html" xml:base="https://azure.github.io/AppService/2021/07/03/Linux-container-from-ACR-with-private-endpoint.html">&lt;p&gt;Securing access to your site is important, but securing access to the source of your site is often equally important.&lt;/p&gt;
+
+&lt;p&gt;In this article I will walk you through setting up a Linux Web App with secure, network-isolated access to the container registry. The scenario is intentionally kept simple to focus on the architecture and configuration.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2021/07/linux-container-acr-pe.png&quot; alt=&quot;ACR pull over private endpoint&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This guide is organized into four steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create network infrastructure&lt;/li&gt;
+  &lt;li&gt;Set up ACR&lt;/li&gt;
+  &lt;li&gt;Create network integrated Web App&lt;/li&gt;
+  &lt;li&gt;Pull from private registry&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In closing, there are sections on advanced scenarios and FAQ.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;This is the third article in a series focusing on network security. If you missed the first two, you can find them here:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://azure.github.io/AppService/2021/03/26/Secure-resilient-site-with-custom-domain.html&quot;&gt;Deploying a secure, resilient site with a custom domain&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://azure.github.io/AppService/2021/03/26/Secure-resilient-site-with-custom-domain.html&quot;&gt;Deploying a site with secure backend communication&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This article will also use Azure CLI executed in bash shell on WSL to set up the environment. It could be done using Azure portal, Resource Manager templates or Azure PowerShell. CLI was chosen as I find it easier to follow and explain the individual steps and configurations needed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Remember&lt;/strong&gt; in the scripts to replace all the resource names that need to be unique. This would be the name of the Web App and Azure Container Registry. You may also change location if you want something closer to home. All other changes are optional.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-create-network-infrastructure&quot;&gt;1. Create Network Infrastructure&lt;/h2&gt;
+
+&lt;p&gt;First set up a Resource Group with a Virtual Network. The VNet should have at least two subnets. One for the VNet Integration and one for the private endpoints. The address-prefix size must be at least /28 for both subnets; small subnets can affect scaling limits and the number of private endpoints. Go with /24 for both subnets if you are not under constraints.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az group create &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; westeurope
+az network vnet create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; westeurope &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr-vnet &lt;span class=&quot;nt&quot;&gt;--address-prefixes&lt;/span&gt; 10.0.0.0/16
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For the subnets, there are two settings that we need to pay attention to. This is often set by the portal or scripts, but here it is called out directly. &lt;a href=&quot;https://docs.microsoft.com/azure/virtual-network/subnet-delegation-overview&quot;&gt;Delegation&lt;/a&gt; “Microsoft.Web/serverfarms” informs the subnet that it is reserved for VNet Integration. For private endpoint subnets you need to &lt;a href=&quot;https://docs.microsoft.com/azure/private-link/disable-private-endpoint-network-policy&quot;&gt;disable private endpoint network policies&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az network vnet subnet create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--vnet-name&lt;/span&gt; secureacr-vnet &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; vnet-integration-subnet &lt;span class=&quot;nt&quot;&gt;--address-prefixes&lt;/span&gt; 10.0.0.0/24 &lt;span class=&quot;nt&quot;&gt;--delegations&lt;/span&gt; Microsoft.Web/serverfarms
+az network vnet subnet create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--vnet-name&lt;/span&gt; secureacr-vnet &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; private-endpoint-subnet &lt;span class=&quot;nt&quot;&gt;--address-prefixes&lt;/span&gt; 10.0.1.0/24 &lt;span class=&quot;nt&quot;&gt;--disable-private-endpoint-network-policies&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The last part of the network infrastructure is the Private DNS Zone. The zone is used to host the DNS records for private endpoint allowing the Web App to find the container registry by name. Go &lt;a href=&quot;https://docs.microsoft.com/azure/private-link/private-endpoint-overview&quot;&gt;here for a primer on Azure Private Endpoints&lt;/a&gt; and &lt;a href=&quot;https://docs.microsoft.com/azure/private-link/private-endpoint-dns&quot;&gt;go here for how DNS Zones fits into private endpoints&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Create the Private DNS Zone:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az network private-dns zone create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; privatelink.azurecr.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Link the zone to the VNet:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az network private-dns &lt;span class=&quot;nb&quot;&gt;link &lt;/span&gt;vnet create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; acr-zonelink &lt;span class=&quot;nt&quot;&gt;--zone-name&lt;/span&gt; privatelink.azurecr.io &lt;span class=&quot;nt&quot;&gt;--virtual-network&lt;/span&gt; secureacr-vnet &lt;span class=&quot;nt&quot;&gt;--registration-enabled&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;… and now the core network setup is done.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-set-up-azure-container-registry&quot;&gt;2. Set Up Azure Container Registry&lt;/h2&gt;
+
+&lt;p&gt;In this section, we will set up the Azure Container Registry account. We will also create the private endpoint and configure the service to block public traffic. First create the service. We need Premium SKU to enable private endpoint and currently admin access must be enabled:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az acr create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; westeurope &lt;span class=&quot;nt&quot;&gt;--sku&lt;/span&gt; Premium &lt;span class=&quot;nt&quot;&gt;--admin-enabled&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--public-network-enabled&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, let’s create the private endpoints to connect the backend services to the VNet. Get the Resource ID of the registry and store it in a variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;acr_resource_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;az acr show &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; tsv&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create the private endpoint:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az network private-endpoint create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr-pe &lt;span class=&quot;nt&quot;&gt;--location&lt;/span&gt; westeurope &lt;span class=&quot;nt&quot;&gt;--connection-name&lt;/span&gt; secureacr-pc &lt;span class=&quot;nt&quot;&gt;--private-connection-resource-id&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$acr_resource_id&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--group-id&lt;/span&gt; registry &lt;span class=&quot;nt&quot;&gt;--vnet-name&lt;/span&gt; secureacr-vnet &lt;span class=&quot;nt&quot;&gt;--subnet&lt;/span&gt; private-endpoint-subnet
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;… and create a DNS Zone Group. This will create the DNS record for the private endpoint in the DNS Zone (and remove it if the private endpoint is deleted):&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az network private-endpoint dns-zone-group create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--endpoint-name&lt;/span&gt; secureacr-pe &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr-zg &lt;span class=&quot;nt&quot;&gt;--private-dns-zone&lt;/span&gt; privatelink.azurecr.io &lt;span class=&quot;nt&quot;&gt;--zone-name&lt;/span&gt; privatelink.azurecr.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Everything is locked down now and you cannot even get to the ACR repositories through the Azure portal. In the ACR Networking blade you can add the public IP of your client if you need to view the registries (images) and other IPs needed to to push an image from remote clients. This will allow your local machine to access the registry:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;my_ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl https://ifconfig.me&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+az acr update &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--public-network-enabled&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--default-action&lt;/span&gt; Deny
+az acr network-rule add &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--ip-address&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$my_ip&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-create-network-integrated-web-app&quot;&gt;3. Create Network Integrated Web App&lt;/h2&gt;
+
+&lt;p&gt;Now we get to creating the actual Web App. To use VNet Integration we need at least the Standard SKU, and then there are a few commands to configure the integration and ensure correct application routing for the scenario:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az appservice plan create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrplan &lt;span class=&quot;nt&quot;&gt;--sku&lt;/span&gt; P1V3 &lt;span class=&quot;nt&quot;&gt;--is-linux&lt;/span&gt;
+az webapp create &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--plan&lt;/span&gt; secureacrplan &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--deployment-container-image-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mcr.microsoft.com/appsvc/staticsite:latest'&lt;/span&gt;
+az webapp update &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--https-only&lt;/span&gt;
+az webapp vnet-integration add &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--vnet&lt;/span&gt; secureacr-vnet &lt;span class=&quot;nt&quot;&gt;--subnet&lt;/span&gt; vnet-integration-subnet
+az webapp config &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--generic-configurations&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{&quot;vnetRouteAllEnabled&quot;: true}'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can now browse to the Web App and all &lt;strong&gt;outbound&lt;/strong&gt; traffic from the Web App will be routed through the VNet.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-pull-from-private-registry&quot;&gt;4. Pull from private registry&lt;/h2&gt;
+
+&lt;p&gt;All the infrastructure is now in place and we just need a custom container to glue it all together. You might get in conflict with the ACR firewall again. If you are using docker locally, you will need to allow your local IP. If you are running the build from somewhere else, this location will also need access to the registry.&lt;/p&gt;
+
+&lt;p&gt;I will create a simple static html site, add it to an nginx container and use ACR Tasks to build the container:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir source
+cd source
+echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;h1&amp;gt;Hello pull from secure Azure Container Registry&amp;lt;/h1&amp;gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; index.html
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'FROM nginx\nCOPY index.html /usr/share/nginx/html'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Dockerfile
+
+&lt;span class=&quot;c&quot;&gt;# Using ACR Tasks&lt;/span&gt;
+az acr build &lt;span class=&quot;nt&quot;&gt;--registry&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--image&lt;/span&gt; privateweb/site:v1 &lt;span class=&quot;nt&quot;&gt;--file&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Using docker daemon on local machine&lt;/span&gt;
+az acr login &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021
+docker build &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; privateweb/site:v1 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+docker tag privateweb:v1 secureacr2021.azurecr.io/privateweb/site:v1
+docker push secureacr2021.azurecr.io/privateweb/site:v1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally update the Web App to use the private image. The Web App needs some configuration values from the registry. The password will appear as null when you set it in CLI, but it will be set. For additional security, you can add it as a Key Vault reference - see the second article for steps to accomplish that.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;acr_server_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;az acr show &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; loginServer &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; tsv&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;acr_username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;az acr credential show &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; username &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; tsv&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;acr_password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;az acr credential show &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacr2021 &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; passwords[0].value &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; tsv&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+az webapp config appsettings &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--settings&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;DOCKER_REGISTRY_SERVER_URL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acr_server_url&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;DOCKER_REGISTRY_SERVER_USERNAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acr_username&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;DOCKER_REGISTRY_SERVER_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$acr_password&lt;/span&gt;
+az webapp config appsettings &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--settings&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'WEBSITE_PULL_IMAGE_OVER_VNET=true'&lt;/span&gt;
+az webapp config &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--resource-group&lt;/span&gt; secureacrsetup &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; secureacrweb2021 &lt;span class=&quot;nt&quot;&gt;--linux-fx-version&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'DOCKER|secureacr2021.azurecr.io/privateweb/site:v1'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Q: Can I apply the same steps to a Function App?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You will need a Premium Elastic plan to use VNet Integration with Function Apps.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="networking" /><summary type="html">Securing access to your site is important, but securing access to the source of your site is often equally important.</summary></entry><entry><title type="html">.NET 6 Preview 5 on App Service</title><link href="https://azure.github.io/AppService/2021/06/25/Dot-Net-6-Preview-5-on-App-Service.html" rel="alternate" type="text/html" title=".NET 6 Preview 5 on App Service" /><published>2021-06-25T00:00:00+00:00</published><updated>2021-06-25T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/06/25/Dot%20Net%206%20Preview%205%20on%20App%20Service</id><content type="html" xml:base="https://azure.github.io/AppService/2021/06/25/Dot-Net-6-Preview-5-on-App-Service.html">&lt;p&gt;In case you missed it, we released support for &lt;a href=&quot;https://azure.github.io/AppService/2021/06/09/Dot-Net-6-Preview-on-App-Service.html&quot;&gt;.NET 6 Preview &lt;strong&gt;4&lt;/strong&gt;&lt;/a&gt; about 2 weeks ago.&lt;/p&gt;
+
+&lt;p&gt;Now we have rolled out support for &lt;a href=&quot;https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-5/&quot;&gt;.NET 6 Preview 5&lt;/a&gt; across all public regions and scenarios on both Windows and Linux App Service plans as well as &lt;a href=&quot;https://techcommunity.microsoft.com/t5/apps-on-azure/what-s-new-with-net-on-azure-functions-june-2021/ba-p/2428669&quot;&gt;Azure Functions&lt;/a&gt; through (&lt;a href=&quot;https://aka.ms/app-service-early-access&quot;&gt;App Service Early Access&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Any app targeting the .NET 6 Early Access on App Service will be automatically updated to the latest .NET 6 Preview releases as they become available all the way up to RC and GA.&lt;/p&gt;
+
+&lt;p&gt;If you are creating a new .NET 6 app on App Service today, you will have Preview 5 available on the platform. If your app was created earlier this week, it will be automatically updated to Preview 5 the next time it cold starts. If you want to trigger the update, you just start/stop the app.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="dotnet" /><summary type="html">In case you missed it, we released support for .NET 6 Preview 4 about 2 weeks ago.</summary></entry><entry><title type="html">Root CA on App Service</title><link href="https://azure.github.io/AppService/2021/06/22/Root-CA-on-App-Service-Guide.html" rel="alternate" type="text/html" title="Root CA on App Service" /><published>2021-06-22T00:00:00+00:00</published><updated>2021-06-22T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/06/22/Root-CA-on%20App-Service-Guide</id><content type="html" xml:base="https://azure.github.io/AppService/2021/06/22/Root-CA-on-App-Service-Guide.html">&lt;p&gt;App Service has a list of Trusted Root Certificates which you cannot modify in the multi-tenant variant version of App Service, but you can load your own CA certificate in the Trusted Root Store in an App Service Environment (ASE), which is a single-tenant environment in App Service. (The Free, Basic, Standard, and Premium App Service Plans are all multi-tenant, and the Isolated Plans are single-tenant.)&lt;/p&gt;
+
+&lt;p&gt;When an app hosted on Azure App Service, tries to connect to a remote endpoint over SSL, it is important that the certificate on remote endpoint service is issued by a Trusted Root CA. If the certificate on the remote service is a self-signed certificate or a private CA certificate, then it will not be trusted by the instance hosting your app and the SSL handshake will fail with this error:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;Could not establish trust relationship for the SSL/TLS secure channel&quot;. 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this situtation, there are two solutions:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Use a certificate that is issued by one of the Trusted Root Certificate Authorities in App Service on the remote server.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#how-to-get-a-list-of-trusted-root-ca-on-app-service-using-kudu&quot;&gt;How to get a list of Trusted Root CA on App Service using Kudu&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If the remote service endpoint certificate could not be changed or there is a need to use a private CA certificate, host your app on an App Service Environment (ASE) and load your own CA certificate in the Trusted Root Store
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/environment/certificates#private-client-certificate&quot;&gt;How to load your own CA certificate to the Trusted Root Store in ASE&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;how-to-get-a-list-of-trusted-root-ca-on-app-service-using-kudu&quot;&gt;How to get a list of Trusted Root CA on App Service using Kudu&lt;/h2&gt;
+
+&lt;h3 id=&quot;how-to-get-to-kudu&quot;&gt;How to get to Kudu&lt;/h3&gt;
+
+&lt;p&gt;Go to your web app on the Azure portal and look for &lt;strong&gt;&lt;em&gt;Development Tools &amp;gt; Advanced Tools&lt;/em&gt;&lt;/strong&gt; and click on “Go -&amp;gt;”. A new tab will open for the Kudu tool. The next steps will depend on if you have a &lt;a href=&quot;#linux&quot;&gt;Linux&lt;/a&gt; or &lt;a href=&quot;#windows&quot;&gt;Windows&lt;/a&gt; app.&lt;/p&gt;
+
+&lt;h3 id=&quot;windows&quot;&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;Go to &lt;strong&gt;Debug console &amp;gt; Powershell&lt;/strong&gt; and a Powershell window will appear. Issue the following command in the console:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-PS&quot;&gt;dir cert:\localmachine\root
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2021/06/Windows-Kudu-RootCA.png&quot; alt=&quot;How to buy Reserved Instances 1&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;linux&quot;&gt;Linux&lt;/h3&gt;
+&lt;p&gt;Go to &lt;strong&gt;SSH&lt;/strong&gt; and issue the following commands:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /etc/ssl/certs
+ls | find *.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2021/06/Linux-Kudu-RootCA.png&quot; alt=&quot;How to buy Reserved Instances 1&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="certsdomains" /><summary type="html">App Service has a list of Trusted Root Certificates which you cannot modify in the multi-tenant variant version of App Service, but you can load your own CA certificate in the Trusted Root Store in an App Service Environment (ASE), which is a single-tenant environment in App Service. (The Free, Basic, Standard, and Premium App Service Plans are all multi-tenant, and the Isolated Plans are single-tenant.)</summary></entry><entry><title type="html">Azure App Service and Azure Functions on Azure Stack Hub 2021 Q1 Released</title><link href="https://azure.github.io/AppService/2021/06/11/App-Service-on-Azure-Stack-Hub-2021-Q1-Update-Released.html" rel="alternate" type="text/html" title="Azure App Service and Azure Functions on Azure Stack Hub 2021 Q1 Released" /><published>2021-06-11T00:00:00+00:00</published><updated>2021-06-11T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/06/11/App%20Service%20on%20Azure%20Stack%20Hub%202021%20Q1%20Update%20Released</id><content type="html" xml:base="https://azure.github.io/AppService/2021/06/11/App-Service-on-Azure-Stack-Hub-2021-Q1-Update-Released.html">&lt;p&gt;The 2021 Q1 update to Azure App Service on Azure Stack Hub is now available. This release updates the resource provider and brings the following key capabilities and fixes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Updates to &lt;strong&gt;App Service Tenant, Admin, Functions portals and Kudu tools&lt;/strong&gt;. Consistent with Azure Stack Portal SDK version.&lt;/li&gt;
+  &lt;li&gt;Updates &lt;strong&gt;Azure Functions&lt;/strong&gt; runtime to &lt;strong&gt;v1.0.13154&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Updates to core service to improve reliability and error messaging enabling easier diagnosis of common issues.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Updates to the following application frameworks and tools&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;ASP.NET Core 5.0.4&lt;/li&gt;
+      &lt;li&gt;.NET Framework 4.8&lt;/li&gt;
+      &lt;li&gt;NodeJS
+        &lt;ul&gt;
+          &lt;li&gt;14.10.1&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Updated Kudu to 90.21106.4900&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Updates to underlying operating system of all roles&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://support.microsoft.com/help/5003638&quot;&gt;2021-06 Cumulative Update for Windows Server 2016 for x64-based Systems (KB5003638)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://support.microsoft.com/help/5001402&quot;&gt;2021-04 Servicing Stack Update for Windows Server 2016 for x64-based Systems (KB5001402)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Defender Definition 1.341.322.0&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Cumulative Updates for Windows Server are now applied to Controller roles as part of deployment and upgrade&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;All other fixes and updates are detailed in the App Service on Azure Stack Hub 2021 Q1 Release Notes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The App Service on Azure Stack Hub 2021.Q1 build number is &lt;strong&gt;91.0.2.20&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Please review the &lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/app-service-release-notes-2021-Q1&quot;&gt;&lt;strong&gt;release notes and all known issues&lt;/strong&gt;&lt;/a&gt; prior to updating your installation of Azure App Service on Azure Stack Hub.&lt;/p&gt;
+
+&lt;p&gt;You can download the new installer and helper scripts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aka.ms/appsvcupdate21q1installer&quot;&gt;Installer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aka.ms/appsvconmashelpers&quot;&gt;Helper Scripts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please read the updated documentation prior to getting started with deployment:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/app-service-release-notes-2021-Q1&quot;&gt;2020 Q3 Update Release Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/azure-stack-app-service-before-you-get-started&quot;&gt;Prerequisites for deploying App Service on Azure Stack Hub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/azure-stack-app-service-deploy&quot;&gt;Deploy the App Service Resource Provider&lt;/a&gt; for new deployments&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/azure-stack-app-service-update&quot;&gt;Update the App Service Resource Provider&lt;/a&gt; for updating existing deployments&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Azure App Service</name></author><category term="Azure Stack" /><summary type="html">The 2021 Q1 update to Azure App Service on Azure Stack Hub is now available. This release updates the resource provider and brings the following key capabilities and fixes:</summary></entry><entry><title type="html">.NET 6 Preview on App Service</title><link href="https://azure.github.io/AppService/2021/06/09/Dot-Net-6-Preview-on-App-Service.html" rel="alternate" type="text/html" title=".NET 6 Preview on App Service" /><published>2021-06-09T00:00:00+00:00</published><updated>2021-06-09T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/06/09/Dot%20Net%206%20Preview%20on%20App%20Service</id><content type="html" xml:base="https://azure.github.io/AppService/2021/06/09/Dot-Net-6-Preview-on-App-Service.html">&lt;p&gt;We are happy to announce that App Service now supports apps targeting &lt;strong&gt;.NET 6 Preview 4&lt;/strong&gt; across all public regions and scenarios on both Windows and Linux App Service plans through (&lt;a href=&quot;https://aka.ms/app-service-early-access&quot;&gt;App Service Early Access&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Azure Functions has also added initial support for .NET 6 Preview.&lt;/p&gt;
+
+&lt;p&gt;This is the first time that a pre-release stack is publicly available in the platform ahead of GA release and it makes good on our promise to accelerate FX availability made during the &lt;a href=&quot;https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/#deploy-net-5-web-apps-to-azure-app-service-today&quot;&gt;.NET 5 GA release announcement&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Any app targeting the .NET 6 Early Access on App Service will be automatically updated to the latest .NET 6 Preview releases as they become available all the way up to RC and GA.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="dotnet" /><summary type="html">We are happy to announce that App Service now supports apps targeting .NET 6 Preview 4 across all public regions and scenarios on both Windows and Linux App Service plans through (App Service Early Access).</summary></entry><entry><title type="html">Preventing crashes due to DiagnosticMonitorTraceListener</title><link href="https://azure.github.io/AppService/2021/06/09/Apps-on-App-Services-crash-due-to-DiagnosticMonitorTraceListener.html" rel="alternate" type="text/html" title="Preventing crashes due to DiagnosticMonitorTraceListener" /><published>2021-06-09T00:00:00+00:00</published><updated>2021-06-09T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/06/09/Apps%20on%20App%20Services%20crash%20due%20to%20DiagnosticMonitorTraceListener</id><content type="html" xml:base="https://azure.github.io/AppService/2021/06/09/Apps-on-App-Services-crash-due-to-DiagnosticMonitorTraceListener.html">&lt;p&gt;Azure App Services has the &lt;a href=&quot;/AppService/2021/03/01/Proactive-Crash-Monitoring-in-Azure-App-Service&quot;&gt;proactive crash monitoring feature&lt;/a&gt;, which checks for process crashes and collects diagnostic data that helps you determine the root cause of the crash. After looking at this feature’s telemetry, we identified a common exception that is causing a lot of apps hosted on Azure App Service to crash with this call-stack:&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;HelperMethodFrame&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TraceUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetRuntimeObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TypedElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;BaseGetRuntimeObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ListenerElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetRuntimeObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ListenerElementsCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetRuntimeObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TraceInternal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get_Listeners&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TraceInternal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diagnostics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Microsoft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Web&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Compilation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Snapshots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SnapshotHelper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;TakeSnapshotTimerCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TimerQueueTimer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;CallCallbackInContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExecutionContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;RunInternal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExecutionContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ContextCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExecutionContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExecutionContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ContextCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TimerQueueTimer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;CallCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TimerQueueTimer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Fire&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TimerQueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FireNextTimers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TimerQueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AppDomainTimerCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DebuggerU2MCatchHandlerFrame&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ContextTransitionFrame&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DebuggerU2MCatchHandlerFrame&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The underlying exception message is &lt;strong&gt;Couldn’t find type for class Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener, Microsoft.WindowsAzure.Diagnostics, Culture=neutral, PublicKeyToken=31bf3856ad364e35&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This issue can happen if you have migrated your application from Azure Cloud Services. Azure Cloud services uses the &lt;strong&gt;DiagnosticMonitorTraceListener&lt;/strong&gt; class and this class is designed for cloud services and is not compabtible with Azure App Services. To address this issue, please follow these steps :&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Remove references to &lt;strong&gt;Microsoft.WindowsAzure.Diagnostics.dll&lt;/strong&gt; from the project.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Remove the following section from the application web.config file (if it exists)&lt;/p&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;system.diagnostics&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;trace&amp;gt;&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;&amp;lt;listeners&amp;gt;&lt;/span&gt;
+       &lt;span class=&quot;nt&quot;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener, Microsoft.WindowsAzure.Diagnostics, Culture=neutral, PublicKeyToken=31bf3856ad364e35&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AzureDiagnostics&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&quot;nt&quot;&gt;&amp;lt;filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+       &lt;span class=&quot;nt&quot;&gt;&amp;lt;/add&amp;gt;&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/listeners&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/trace&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nt&quot;&gt;&amp;lt;/system.diagnostics&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We hope this information helps in preventing crashes within your application.&lt;/p&gt;
+
+&lt;p&gt;Happy Debugging !&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="Diagnostics" /><summary type="html">Azure App Services has the proactive crash monitoring feature, which checks for process crashes and collects diagnostic data that helps you determine the root cause of the crash. After looking at this feature’s telemetry, we identified a common exception that is causing a lot of apps hosted on Azure App Service to crash with this call-stack:</summary></entry><entry><title type="html">App Service Managed Certificate now in General Availability</title><link href="https://azure.github.io/AppService/2021/05/25/App-Service-Managed-Certificate-GA.html" rel="alternate" type="text/html" title="App Service Managed Certificate now in General Availability" /><published>2021-05-25T00:00:00+00:00</published><updated>2021-05-25T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/05/25/App-Service-Managed-Certificate-GA</id><content type="html" xml:base="https://azure.github.io/AppService/2021/05/25/App-Service-Managed-Certificate-GA.html">&lt;p&gt;App Service Managed Certificate is now in General Availability for both apex domains and sub-domains. This feature allows customers to secure their custom domains on Linux and on Windows with an SSL certificate at no additional cost. This provides developers a zero-cost option to work on their dev, test, and production sites. This certificate offering is a managed experience that allows customers to just set-and-forget as the automatic certificate renewal and the binding update will be handled by App Service. App Service Managed Certificate is not meant to be used as a client certificate and it is only available for customers on multi-tenant App Service Plan of Basic and above (free, shared, and isolated tiers are not supported).&lt;/p&gt;
+
+&lt;h2 id=&quot;app-service-managed-certificate-vs-app-service-certificate&quot;&gt;App Service Managed Certificate VS App Service Certificate&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;App Service Managed Certificate&lt;/th&gt;
+      &lt;th&gt;App Service Certificate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Certificate offering&lt;/td&gt;
+      &lt;td&gt;Standard certificate&lt;/td&gt;
+      &lt;td&gt;Standard and wildcard certificate&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Certificate offering&lt;/td&gt;
+      &lt;td&gt;No cost&lt;/td&gt;
+      &lt;td&gt;$69.99/year for standard and $299.99/year for wildcard&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apex domain support&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sub-domain support&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Auto-renew&lt;/td&gt;
+      &lt;td&gt;Yes; cannot opt out&lt;/td&gt;
+      &lt;td&gt;Yes; can opt out during create or anytime afterwards&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Auto-update SSL binding after renew&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;what-to-expect-post-ga&quot;&gt;What to expect post GA?&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;There is an upcoming plan to remove thumbprint information from both portal and API to provide our customers a more managed experience for certificates without having to worry about all the details. Also, App Service Managed Certificate is not meant to be used as a client certificate.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Azure App Service</name></author><category term="certsdomains" /><summary type="html">App Service Managed Certificate is now in General Availability for both apex domains and sub-domains. This feature allows customers to secure their custom domains on Linux and on Windows with an SSL certificate at no additional cost. This provides developers a zero-cost option to work on their dev, test, and production sites. This certificate offering is a managed experience that allows customers to just set-and-forget as the automatic certificate renewal and the binding update will be handled by App Service. App Service Managed Certificate is not meant to be used as a client certificate and it is only available for customers on multi-tenant App Service Plan of Basic and above (free, shared, and isolated tiers are not supported).</summary></entry><entry><title type="html">App Service Environment v3 march to GA</title><link href="https://azure.github.io/AppService/2021/05/25/asev3-march-to-ga.html" rel="alternate" type="text/html" title="App Service Environment v3 march to GA" /><published>2021-05-25T00:00:00+00:00</published><updated>2021-05-25T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/05/25/asev3-march-to-ga</id><content type="html" xml:base="https://azure.github.io/AppService/2021/05/25/asev3-march-to-ga.html">&lt;p&gt;The App Service Environment v3 (ASEv3) has been in preview since November 2020. During this time it was made available across most regions, received numerous small improvements and was generally very well received. Before GA (General Availability) we will be releasing the GA version into preview.  After that update completes, you will be able to make new preview ASEv3’s that replace the private endpoint with an address in the ASE subnet. Also before GA, the preview versions that already exist will be upgraded.&lt;/p&gt;
+
+&lt;h2 id=&quot;upcoming-changes&quot;&gt;Upcoming changes&lt;/h2&gt;
+
+&lt;p&gt;The GA version of ASEv3 has a few enhancements that were not available earlier in preview. To be clear, this release is not available at the time of this blog but it is planned to be released soon. Some of the feature improvement highlights include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can deploy an external VIP ASE. This would be an ASE with a public address for inbound traffic.&lt;/li&gt;
+  &lt;li&gt;Maximum ASE instance count is 200. This is the same as ASEv2 where the maximum App Service plan instance count is 100 and that the total number of instances across all App Service plans is 200&lt;/li&gt;
+  &lt;li&gt;You can deploy a zone redundant ASEv3.&lt;/li&gt;
+  &lt;li&gt;Scaling times are improved from earlier in the preview&lt;/li&gt;
+  &lt;li&gt;Your ASE only requires use of one subnet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That leads to the question then on how do you know you are making an ASEv3 that is on the GA version? You can easily tell the difference during the ASEv3 creation flow where you will not be prompted for two subnets anymore. That should be the clearest indicator you are using the newest version.&lt;/p&gt;
+
+&lt;h2 id=&quot;upgrade-of-preview-asev3-instances&quot;&gt;Upgrade of preview ASEv3 instances&lt;/h2&gt;
+
+&lt;p&gt;If you have a preview version of ASEv3 before the upgrade to the GA version, you need to know that the upgrade to the final GA version will:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cause downtime to your ASEv3&lt;/li&gt;
+  &lt;li&gt;Change the inbound address to your ASEv3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The downtime to your ASEv3 happens as we switch from using the private endpoint provisioned with your ASEv3 and redeploy the ASEv3 with an internal load balancer.  The use of the load balancer is completely internal to the ASE.  This is a one time event and there are no other expected system downtime events. The private endpoint that was originally provisioned with your preview ASEv3 will still be there and should be deleted after the upgrade.&lt;/p&gt;
+
+&lt;p&gt;With the removal of the private endpoint to your ASEv3, your inbound address will change from the current private endpoint address to an address in your ASE subnet.  You will need to update DNS to reflect this.  Even if you are using Azure DNS private zones, it will not automatically pick this change up and it must be done manually.  After your ASEv3 is upgraded to the load balancer version:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Go into your ASE portal page and select the IP addresses UI&lt;/li&gt;
+  &lt;li&gt;Change your DNS records that pointed to the private endpoint address to instead point to the new inbound address shown in the portal.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To tell if your preview ASEv3 was upgraded to the GA release candidate, go into the ASE portal and look at the IP addresses UI. You will no longer see private endpoint listed for the inbound address. You will see the Virtual IP is set to internal.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2021/05/asev3-marchtoga-ip-addresses.png&quot; alt=&quot;ASEv3 GA candidate IP address UI&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ga-limitations&quot;&gt;GA limitations&lt;/h2&gt;
+
+&lt;p&gt;While there are numerous improvements with ASEv3 over earlier versions, there are a few things that are not available at GA that were available in ASEv2.  Those items that are not available include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;IP based SSL&lt;/li&gt;
+  &lt;li&gt;Remote debug&lt;/li&gt;
+  &lt;li&gt;FTP&lt;/li&gt;
+  &lt;li&gt;SMTP&lt;/li&gt;
+  &lt;li&gt;Network Watcher and NSG Flow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;upgrade-from-asev2&quot;&gt;Upgrade from ASEv2&lt;/h2&gt;
+
+&lt;p&gt;Upgrade from ASEv2 will come after GA.  In the first version of the upgrade you will be able to upgrade an ASEv2 that is either an external VIP ASEv2 or an internal VIP ASEv2 that has a domain suffix of .appserviceenvironment.net.  Initially the upgrade capability won’t support internal ASEs with custom domain suffixes nor will it offer the ability initially to upgrade your ASEv2 to being a zone redundant ASEv3.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="networking" /><summary type="html">The App Service Environment v3 (ASEv3) has been in preview since November 2020. During this time it was made available across most regions, received numerous small improvements and was generally very well received. Before GA (General Availability) we will be releasing the GA version into preview. After that update completes, you will be able to make new preview ASEv3’s that replace the private endpoint with an address in the ASE subnet. Also before GA, the preview versions that already exist will be upgraded.</summary></entry></feed>
